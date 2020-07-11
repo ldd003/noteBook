@@ -12,6 +12,8 @@
 * 查看
 
   ```
+  git config --list
+  
   git config user.email 
   git config user.name
   ```
@@ -19,7 +21,7 @@
 * 设置全局
 
   ```
-  git config --global user.email 'xx'
+  git config --global user.email 'xx'(可以没有引号，下同)
   git config --global user.name 'xx'
   ```
 
