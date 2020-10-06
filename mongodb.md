@@ -13,7 +13,8 @@
 * 基本
   * 查看版本 `db.version()`
   * 查看是否和数据库链接成功了`db.runCommand({ping:1})`，`{ "ok" : 1 }`表示成功
-
+* 命令行清屏`cls`
+  
 * 库
 
   * 查看已有数据库`show dbs`
@@ -31,12 +32,38 @@
 
 * 文件
 
-  * 查看集合下的数据
+  * 查看集合下的数据(query+fields+limit+skip+sort)
 
-    * 所有`db.xx.find()`
+    * 所有`db.xx.find()`，带条件`db.xx.find({..})`，获取执行信息`db.xx.find({..}).explain({})`
+    * 有多少条`db.xx.find().count()`
     * 第一条`db.xx.findOne()`
+    * 只返回部分属性`db.find({..},{k1:true,k2:false,k3:1,k4:0,..})`
+    * $where--js方法进行复杂查询`db.xx.find({$where:'this.age>10'})`
+    * ---下面的是比较相关---
+    * $gt--大于`db.xx.find({age:{$gt:10}})`
+    * $gte--大于等于`db.xx.find({age:{$gte:10}})`
+    * $eq--等于`db.xx.find({age:{$eq:10}})`，当然不加这个条件时，默认就是等于
+    * $lt--小于`db.xx.find({age:{$lt:10}})`
+    * $lte--小于等于`db.xx.find({age:{$lte:10}})`
+    * $ne--不等于`db.xx.find({age:{$ne:10}})`
+    * ---下面的是条件相关---
+    * $in--等于(多个)`db.xx.find({age:{$in:[10,20]}})`
+    * $and--与`db.xx.find({$and:[{age:{$gt:10}},{age:{$lt:20}}]})`
+    * $or--或`db.xx.find({$or:[{age:{$gt:20}},{age:{$lt:10}}]})`
+    * $not--非`db.xx.find({age:{$not:{$gt:10,$lt:20}}})`
+    * ---下面的是数组相关---
+    * 基本--`db.xx.find({arr:['a','b','c']})`(有且只有)，`db.xx.find({arr:'a'})`(含有)
+    * $all--含有多项(都要有)`db.xx.find({arr:{$all:['a','b']}})`
+    * $in--含有项(可选)`db.xx.find({arr:{$in:['a','b']}})`
+    * $size--数组个数`db.xx.find({arr:{$size:n}})`
+    * $slice--显示个数`db.xx.find({},{arr:{$slice:n}})`
+    * ---下面的是分页排序相关---
+    * limit()--每页多少条`db.xx.find().limit(10)`
+    * skip()--跳过多少条`db.xx.find().skip(10)`
+    * limit+skip--实现分页`db.xx.find().limit(10).skip(10*(2-1))`(第2页)
+    * sort()--排序`db.xx.find().sort({age:1})`(1升序,-1降序)
 
-  * 修改，
+  * 修改
 
     * `db.xx.update({..},{..})`(全替换)
     * $set--`db.xx.update({..},{$set:{..}})`(单修改)，有嵌套时，`db.xx.update({..},{$set:{a:'x','obj.k':v,'arr.i':v}})`
@@ -110,21 +137,39 @@
       // }
       ```
 
-      
-
   * 删除
 
     * `db.xx.remove({..})`
+
+  * 索引相关
+    * 查找`db.xx.getIndexes()`
+    * 添加`db.ensureIndex({k:1})`
+    * 删除`db.xx.dropIndex('k_1')`(注意这里不是key名，是name名)
+    * 建立全文索引`db.xx.ensureIndex({k:'text'})`，查找时`db.xx.find({$text:{$search:'a'}})`(单个词)，`db.xx.find({$text:{$search:'a b'}})`(多个词)，`db.xx.find({$text:{$search:'\"a b\"'}})`(连词,转义一下)
 
 ### 通过js操作
 
 ```javascript
 //a.js
 const adb = connect("xx"); //连接数据库xx，没有的话新建之
+//增,删,改
 adb.yy.insert({ userName: "", loginTime: Date.now() }); //新建集合 并插入数据
 
-//可以
-//方式1 在系统cmd执行mongo，在vscode cmd中执行mongo a.js
-//方式2 在vscode cmd执行mongo，再load('./a.js')
+//查
+//-方式1
+// var result = db.workmate.find();
+// while (result.hasNext()) {
+//   printjson(result.next());
+// }
+//-方式2
+// var result = db.workmate.find();
+// result.forEach((r) => {
+//   printjson(r);
+// });
+
+
+//执行
+//-方式1 在系统cmd执行mongo，在vscode cmd中执行mongo a.js
+//-方式2 在vscode cmd执行mongo，再load('./a.js')
 ```
 
