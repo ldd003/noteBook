@@ -65,7 +65,7 @@ node.js的包管理工具
 
 1. 安装nvm
 
-   查看nvm命令 `nvm`
+   查看nvm命令`nvm`, mac是`nvm ls-remote`
 
    查看nvm版本`nvm version`
 
