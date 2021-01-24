@@ -68,7 +68,7 @@
     * `db.xx.update({..},{..})`(全替换)
     * $set--`db.xx.update({..},{$set:{..}})`(单修改)，有嵌套时，`db.xx.update({..},{$set:{a:'x','obj.k':v,'arr.i':v}})`
 
-    * multi--修改多个`db.xx.update({..},{$set:{..},{multi:true}})`，可以简写为`db.xx.update({..},{$set:{..}},false,true)`
+    * multi--修改多个`db.xx.update({..},{$set:{..}},{multi:true})`，可以简写为`db.xx.update({..},{$set:{..}},false,true)`
 
     * upsert--修改未匹配到想插入数据`db.xx.update({..},{$set:{..},{upsert:true}})`，可以简写为`db.xx.update({..},{$set:{..}},true)`
 
