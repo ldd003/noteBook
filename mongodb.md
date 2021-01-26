@@ -143,7 +143,7 @@
 
   * 索引相关
     * 查找`db.xx.getIndexes()`
-    * 添加`db.ensureIndex({k:1})`
+    * 添加`db.xx.ensureIndex({k:1})`，如果加上unique即`db.xx.ensureIndex({k:1},{unique: true})`,则可让此字段不可重复
     * 删除`db.xx.dropIndex('k_1')`(注意这里不是key名，是name名)
     * 建立全文索引`db.xx.ensureIndex({k:'text'})`，查找时`db.xx.find({$text:{$search:'a'}})`(单个词)，`db.xx.find({$text:{$search:'a b'}})`(多个词)，`db.xx.find({$text:{$search:'\"a b\"'}})`(连词,转义一下)
 
