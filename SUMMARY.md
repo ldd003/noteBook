@@ -7,6 +7,7 @@
 * [yarn](yarn.md)
 * [mysql](mysql.md)
 * [mongodb](mongodb.md)
+* [redis](redis.md)
 * [pm2](pm2.md)
 * [vscode](vscode.md)
 
