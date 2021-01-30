@@ -14,3 +14,7 @@ web server常用缓存数据库，数据存放在内存中
 * 获取所有key`keys *`
 * 设置某个key`set xx value`
 * 获取某个key值`get xx`
+* 删除
+  * 删除一个`del xx`
+  * 删除几个`del xx yy zz`
+  * 删除所有`flushall`
