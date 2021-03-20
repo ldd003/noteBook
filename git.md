@@ -131,3 +131,17 @@
 * 备注
   * 会生成到.gitconfig 对应里面的[alias]
 
+###   其它
+
+* 大小写敏感问题（本地文件名和远程文件名大小写不一致）
+
+  ```javascript
+  //让项目大小写敏感
+  git config core.ignorecase false
+  //修改项目，把对应的文件，大小写，写成想要的。把修改push到远程仓库
+  //此时远程仓库有重名（大小写）到文件，删除不想要文件
+  git rm --cached path(如src/views/xx) -r
+  //把修改push到远程仓库
+  ```
+
+  
