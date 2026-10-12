@@ -45,6 +45,8 @@
   ```
   git remote add origin git@github.com:ldd0003/xx.git(ssh)
   git remote add origin https://github.com/ldd003/xx.git(https)
+  git branch -M main
+  // git remote set-url origin git@github.com:ldd003/xx.git -- 切换连接方式为ssh，https方式不稳定
   ```
 
 * 提交
